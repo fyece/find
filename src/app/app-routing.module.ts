@@ -1,10 +1,26 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
+import { FindPageComponent } from './pages/find-page/find-page.component';
+import { LoginPageComponent } from './pages/login-page/login-page.component';
 
-const routes: Routes = [];
+const routes: Routes = [
+  {
+    path: '',
+    redirectTo: '/find',
+    pathMatch: 'full',
+  },
+  {
+    path: 'find',
+    component: FindPageComponent,
+  },
+  {
+    path: 'login',
+    component: LoginPageComponent,
+  },
+];
 
 @NgModule({
   imports: [RouterModule.forRoot(routes)],
-  exports: [RouterModule]
+  exports: [RouterModule],
 })
-export class AppRoutingModule { }
+export class AppRoutingModule {}

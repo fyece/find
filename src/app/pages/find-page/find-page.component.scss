@@ -1,0 +1,27 @@
+.input-field {
+  @apply p-2 rounded border bg-gray-50;
+}
+
+.error-message {
+  @apply text-red-500 text-sm;
+}
+
+.tab {
+  @apply w-full text-sm text-left text-gray-700;
+}
+
+.thead {
+  @apply text-xs text-gray-700 uppercase bg-gray-50;
+}
+
+.thead-col {
+  @apply py-3 px-6;
+}
+
+.tab-row {
+  @apply bg-white border-b;
+}
+
+.tab-cell {
+  @apply py-4 px-6;
+}
