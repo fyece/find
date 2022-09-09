@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
+import { Title } from '@angular/platform-browser';
 import { Contract } from 'src/app/types/Contract';
 import { MonthDiffValidator, phoneMask } from 'src/app/utils';
 
@@ -29,7 +30,9 @@ export class FindPageComponent implements OnInit {
     [MonthDiffValidator]
   );
 
-  constructor() {}
+  constructor(private titleService: Title) {
+    this.titleService.setTitle('Поиск договоров')
+  }
 
   find() {
     console.log('finding');
