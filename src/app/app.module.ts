@@ -6,9 +6,10 @@ import { AppComponent } from './app.component';
 import { LoginPageComponent } from './pages/login-page/login-page.component';
 import { FindPageComponent } from './pages/find-page/find-page.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { HeaderComponent } from './components/header/header.component';
 
 @NgModule({
-  declarations: [AppComponent, LoginPageComponent, FindPageComponent],
+  declarations: [AppComponent, LoginPageComponent, FindPageComponent, HeaderComponent],
   imports: [BrowserModule, AppRoutingModule, FormsModule, ReactiveFormsModule, BrowserAnimationsModule ],
   providers: [],
   bootstrap: [AppComponent],

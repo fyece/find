@@ -35,7 +35,7 @@ export class FindPageComponent implements OnInit {
     console.log('finding');
   }
 
-  downloadDoc() {
+  download() {
     console.log('downloading');
     // console.log(this.findForm.errors, this.findForm.invalid);
   }
