@@ -1,97 +1,112 @@
-<div>
-  <div class="flex flex-col space-y-8 p-2 md:p-4">
-    <div class="mb-8">
-      <img src="../../../assets/images/logo.svg" alt="AK BARS Med logo" class="h-8" />
-  
+<div class="bg-gray-50 min-h-screen">
+  <div class="flex flex-col space-y-6 pt-6 sm:space-y-8 p-3 sm:p-8">
+    <div class="">
+      <img
+        src="../../../assets/images/logo.svg"
+        alt="AK BARS Med logo"
+        class="block h-8 mx-auto sm:mx-0"
+      />
     </div>
-    <h1 class="text-4xl text-gray-700 font-semibold text-center mt-12">Поиск договора</h1>
+    <div class="bg-white rounded-lg p-4 md:p-6 w-fit mx-auto">
+      <h1 class="text-4xl text-gray-700 font-semibold text-center mb-6">
+        Поиск договора
+      </h1>
 
-    <form [formGroup]="findForm" (ngSubmit)="find()">
-      <div class="flex flex-col space-y-3 lg:w-1/3 mx-auto">
-        <div class="flex flex-col space-y-1">
-          <input
-            type="text"
-            placeholder="Номер договора"
-            formControlName="contractNumber"
-            class="input-field"
-          />
-          <span
-            [hidden]="!(
-              findForm.controls['contractNumber'].invalid &&
-              findForm.controls['contractNumber'].touched
-            )"
-            class="error-message"
-            >Необходимо ввести минимум 3 цифры</span
-          >
-        </div>
-				<div>
-        <div class="grid gap-3 grid-cols-2">
-          <input
-            type="text"
-						onfocus="(this.type='date')"
-						onblur="(this.type='text')"
-            placeholder="Дата от"
-            formControlName="dateFrom"
-            class="input-field"
-          />
-          <input
-            type="text"
-						onfocus="(this.type='date')"
-						onblur="(this.type='text')"
-            placeholder="Дата до"
-            formControlName="dateTo"
-            class="input-field"
-          />
-        </div>
-				<span
-            *ngIf="
-              findForm.controls['dateFrom'].touched &&
-              findForm.controls['dateTo'].touched &&
-              findForm.errors &&
-              findForm.errors['diffMoreThanMonth']
-            "
-            class="error-message"
-            >Промежуток должен быть меньше одного месяца</span
-          >
-			</div>
+      <form [formGroup]="findForm" (ngSubmit)="find()">
+        <div class="flex flex-col space-y-3 mx-auto">
+          <div class="flex flex-col space-y-1">
+            <input
+              type="text"
+              placeholder="Номер договора"
+              formControlName="contractNumber"
+              class="input-field"
+            />
+            <span
+              [hidden]="
+                !(
+                  findForm.controls['contractNumber'].invalid &&
+                  findForm.controls['contractNumber'].touched
+                )
+              "
+              class="error-message"
+              >Необходимо ввести минимум 3 цифры</span
+            >
+          </div>
+          <div>
+            <div class="grid gap-3 grid-cols-2">
+              <input
+                type="text"
+                onfocus="(this.type='date')"
+                onblur="(this.type='text')"
+                placeholder="Дата от"
+                formControlName="dateFrom"
+                class="input-field"
+              />
+              <input
+                type="text"
+                onfocus="(this.type='date')"
+                onblur="(this.type='text')"
+                placeholder="Дата до"
+                formControlName="dateTo"
+                class="input-field"
+              />
+            </div>
+            <span
+              *ngIf="
+                findForm.controls['dateFrom'].touched &&
+                findForm.controls['dateTo'].touched &&
+                findForm.errors &&
+                findForm.errors['diffMoreThanMonth']
+              "
+              class="error-message"
+              >Промежуток должен быть меньше одного месяца</span
+            >
+          </div>
 
-        <input
-          type="text"
-          placeholder="ФИО страхователя"
-          formControlName="insurant"
-          class="input-field"
-        />
-        <input
-          type="text"
-          placeholder="ФИО застрахованного"
-          formControlName="insured"
-          class="input-field"
-        />
-        <input
-          type="text"
-          placeholder="Номер телефона"
-          formControlName="phoneNumber"
-          class="input-field"
-        />
-        <input
-          type="text"
-          placeholder="Email"
-          formControlName="email"
-          class="input-field"
-        />
-        <button
-          [disabled]="findForm.invalid"
-          class="rounded px-8 py-2 w-fit mx-auto bg-green-500 text-white duration-100 hover:bg-green-600 hover:ease-in disabled:bg-green-300"
-        >
-          Найти
-        </button>
+          <input
+            type="text"
+            placeholder="ФИО страхователя"
+            formControlName="insurant"
+            class="input-field"
+          />
+          <input
+            type="text"
+            placeholder="ФИО застрахованного"
+            formControlName="insured"
+            class="input-field"
+          />
+          <input
+            type="text"
+            placeholder="Номер телефона"
+            formControlName="phoneNumber"
+            class="input-field"
+          />
+          <input
+            type="text"
+            placeholder="Email"
+            formControlName="email"
+            class="input-field"
+          />
+          <button
+            [disabled]="findForm.invalid"
+            class="rounded font-semibold px-8 py-2 w-fit mx-auto bg-green-500 text-white duration-100 hover:bg-green-600 hover:ease-in disabled:bg-green-300"
+          >
+            Найти
+          </button>
+        </div>
+      </form>
+    </div>
+
+    <div class="bg-white rounded-lg space-y-5 p-3 w-full mx-auto">
+      <h2 class="text-xl font-semibold text-gray-700">Список договоров</h2>
+
+      <div *ngIf="false">
+        <p class="text-xl font-semibold text-gray-400 pb-4 text-center">
+          Ничего не найдено
+        </p>
       </div>
-    </form>
 
-    <div class="space-y-5">
-      <h2 class="text-xl font-medium text-gray-800">Список договоров</h2>
-
-      <div class="overflow-x-auto w-full">
+      <div *ngIf="true" class="overflow-x-auto w-full">
         <table class="tab sticky top-0 w-full">
           <thead class="thead">
             <tr>
@@ -108,6 +123,23 @@
           <tbody>
             <tr class="tab-row">
               <th scope="row" class="tab-cell">1</th>
+              <td class="tab-cell">Имя Фамилия Отчество</td>
+              <td class="tab-cell">Имя Фамилия Отчество</td>
+              <td class="tab-cell">999999999999</td>
+              <td class="tab-cell">9.09.22</td>
+              <td class="tab-cell">9.09.22</td>
+              <td class="tab-cell">28000 / 12000</td>
+              <td class="tab-cell">
+                <button
+                  class="px-2 py-2 text-green-600 font-semibold duration-100 hover:text-green-700 hover:ease-in"
+                  (click)="download()"
+                >
+                  Скачать
+                </button>
+              </td>
+            </tr>
+            <tr class="tab-row">
+              <th scope="row" class="tab-cell">2</th>
               <td class="tab-cell">Имя Фамилия Отчество</td>
               <td class="tab-cell">Имя Фамилия Отчество</td>
               <td class="tab-cell">999999999999</td>

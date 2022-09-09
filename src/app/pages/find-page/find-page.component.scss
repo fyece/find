@@ -1,5 +1,5 @@
 .input-field {
-  @apply p-2 rounded border bg-gray-50;
+  @apply p-2 rounded  bg-gray-50 text-gray-800;
 }
 
 .error-message {
@@ -19,7 +19,7 @@
 }
 
 .tab-row {
-  @apply bg-white border-b;
+  @apply bg-white border-b last-of-type:border-none;
 }
 
 .tab-cell {
