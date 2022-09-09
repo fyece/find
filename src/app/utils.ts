@@ -17,9 +17,14 @@ export let phoneMask = (rawValue:any) => {
 export const emailReg = /^((([^<>()\[\]\\.,;:\s@a-zA-Za-яА-Я"]|[a-zA-Z])+(\.([^<>()\[\]\\.,;:\s@"a-zA-Za-яА-Я]|[a-zA-Z])+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
 
 
+function stringToDate(date: string){
+  const pattern = /(\d{2})\.(\d{2})\.(\d{4})/;
+  return new Date(date.replace(pattern,'$3-$2-$1'));
+}
+
 function isMonthDiff(dateFrom:Date, dateTo:Date){
-  const date1 = new Date(dateFrom)
-  const date2 = new Date(dateTo)
+  const date1 = stringToDate(dateFrom.toString())
+  const date2 = stringToDate(dateTo.toString())
   const month = 30 * 24 * 60 * 60 * 1000
   const diff= Math.abs(date1.getTime() - date2.getTime())
   if(diff <= month){
@@ -35,5 +40,5 @@ export const MonthDiffValidator: ValidatorFn = (fg: AbstractControl) => {
   const diff = isMonthDiff(start, end)
   return start !== null && end !== null && diff
     ? null
-    : { range: true } as ValidationErrors;
+    : { diffMoreThanMonth: true } as ValidationErrors;
 };
