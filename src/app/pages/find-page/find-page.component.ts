@@ -1,7 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { Title } from '@angular/platform-browser';
-import { Contract } from 'src/app/types/Contract';
+import { FindService } from 'src/app/services/find.service';
+import { Contract, ContractDto } from 'src/app/types/types';
 import { MonthDiffValidator, phoneMask } from 'src/app/utils';
 
 @Component({
@@ -11,7 +12,7 @@ import { MonthDiffValidator, phoneMask } from 'src/app/utils';
 })
 export class FindPageComponent implements OnInit {
   contracts: Contract[] = [];
-  phoneMask = phoneMask
+  phoneMask = phoneMask;
 
   findForm: FormGroup = new FormGroup(
     {
@@ -30,17 +31,27 @@ export class FindPageComponent implements OnInit {
     [MonthDiffValidator]
   );
 
-  constructor(private titleService: Title) {
-    this.titleService.setTitle('Поиск договоров')
+  constructor(private titleService: Title, private findService: FindService) {
+    this.titleService.setTitle('Поиск договоров');
   }
 
   find() {
+    const contractDto: ContractDto = {
+      insurant: this.findForm.get('insurant')?.value,
+      insured: this.findForm.get('insured')?.value,
+      contractNumber: this.findForm.get('contractNumber')?.value,
+      applicationDateStart: this.findForm.get('dateFrom')?.value,
+      applicationDateEnd: this.findForm.get('dateTo')?.value,
+    };
+    this.findService
+      .getContracts(contractDto)
+      .subscribe((contracts) => (this.contracts = contracts));
     console.log('finding');
   }
 
   download() {
     console.log('downloading');
-    // console.log(this.findForm.errors, this.findForm.invalid);
+    console.log(this.findForm.errors, this.findForm.invalid);
   }
 
   ngOnInit(): void {}

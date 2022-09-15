@@ -138,14 +138,14 @@
                 </button>
               </td>
             </tr>
-            <tr class="tab-row">
-              <th scope="row" class="tab-cell">2</th>
-              <td class="tab-cell">Имя Фамилия Отчество</td>
-              <td class="tab-cell">Имя Фамилия Отчество</td>
-              <td class="tab-cell">999999999999</td>
-              <td class="tab-cell">9.09.22</td>
-              <td class="tab-cell">9.09.22</td>
-              <td class="tab-cell">28000 / 12000</td>
+            <tr *ngFor="let contract of contracts; let i = index" class="tab-row">
+              <th scope="row" class="tab-cell">{{i+1}}</th>
+              <td class="tab-cell">{{contract.insurant}}</td>
+              <td class="tab-cell">{{contract.insured}}</td>
+              <td class="tab-cell">{{contract.contractNumber}}</td>
+              <td class="tab-cell">{{contract.applicationDate}}</td>
+              <td class="tab-cell">{{contract.paymentDate}}</td>
+              <td class="tab-cell">{{contract.insuredSum}} / {{contract.premium}}</td>
               <td class="tab-cell">
                 <button
                   class="px-2 py-2 text-green-600 font-semibold duration-100 hover:text-green-700 hover:ease-in"
