@@ -7,36 +7,23 @@ import { Contract, ContractDto } from '../types/types';
   providedIn: 'root',
 })
 export class FindService {
-  baseUrl = 'akbars';
+  baseUrl = 'http://orderfinder';
 
   constructor(private http: HttpClient) {}
 
   getContracts(contractDto: ContractDto): Observable<Contract[]> {
-    const url = `${this.baseUrl}/find`;
-    const headers = new HttpHeaders();
-    headers.append('Content-Type', 'application/json');
-    const params: HttpParams = new HttpParams();
-    contractDto.insurant
-      ? params.append('insurant', contractDto.insurant)
-      : null;
-    contractDto.insured ? params.append('insured', contractDto.insured) : null;
-    contractDto.contractNumber
-      ? params.append('contractNumber', contractDto.contractNumber)
-      : null;
-    contractDto.applicationDateStart
-      ? params.append('applicationDateStart', contractDto.applicationDateStart)
-      : null;
-    contractDto.applicationDateEnd
-      ? params.append('applicationDateEnd', contractDto.applicationDateEnd)
-      : null;
+    const url = `${this.baseUrl}/docs`;
 
     return this.http
-      .get<Contract[]>(url, { headers: headers, params: params })
+      .post<Contract[]>(url, contractDto)
       .pipe(catchError(this.handleError<Contract[]>('getContracts', [])));
   }
 
   getContractFile(){
-    
+    const url = ``;
+    const params: HttpParams = new HttpParams();
+    // add params
+    return this.http.get(url, {params: params})
   }
 
   private handleError<T>(operation = 'operation', result?: T) {

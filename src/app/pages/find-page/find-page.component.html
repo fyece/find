@@ -121,7 +121,9 @@
             </tr>
           </thead>
           <tbody>
-            <tr class="tab-row">
+
+            <!-- FAKE ROW -->
+            <!-- <tr class="tab-row">
               <th scope="row" class="tab-cell">1</th>
               <td class="tab-cell">Имя Фамилия Отчество</td>
               <td class="tab-cell">Имя Фамилия Отчество</td>
@@ -137,15 +139,17 @@
                   Скачать
                 </button>
               </td>
-            </tr>
+            </tr> -->
+
+            <!-- REAL ROWS -->
             <tr *ngFor="let contract of contracts; let i = index" class="tab-row">
               <th scope="row" class="tab-cell">{{i+1}}</th>
-              <td class="tab-cell">{{contract.insurant}}</td>
-              <td class="tab-cell">{{contract.insured}}</td>
-              <td class="tab-cell">{{contract.contractNumber}}</td>
-              <td class="tab-cell">{{contract.applicationDate}}</td>
-              <td class="tab-cell">{{contract.paymentDate}}</td>
-              <td class="tab-cell">{{contract.insuredSum}} / {{contract.premium}}</td>
+              <td class="tab-cell">{{contract.strahov}}</td>
+              <td class="tab-cell">{{contract.zastr}}</td>
+              <td class="tab-cell">{{contract.dog_nom}}</td>
+              <td class="tab-cell">{{contract.dog_data}}</td>
+              <td class="tab-cell">{{contract.pay_data}}</td>
+              <td class="tab-cell">{{contract.strahsum | number : '1.0-2'}} / {{contract.premia | number : '1.0-2'}}</td>
               <td class="tab-cell">
                 <button
                   class="px-2 py-2 text-green-600 font-semibold duration-100 hover:text-green-700 hover:ease-in"

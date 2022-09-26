@@ -7,17 +7,21 @@ export interface ContractDto {
 }
 
 export interface Contract {
-  id: number;
-  insurant: string;
-  insured: string;
-  contractNumber: string;
-  applicationDate: string;
-  paymentDate: string;
-  insuredSum: number;
-  premium: number;
+  dog_nom: string;
+  dog_data: string;
+  nachdata: string;
+  kondata: string;
+  strahsum: string;
+  premia: string;
+  strahov: string;
+  zastr: string;
+  s_phone: string;
+  fiscal_number: string;
+  pay_data: string;
+  Res: string;
 }
 
 export interface LoginDto {
   login: string;
-  password: string;
+  pass: string;
 }
