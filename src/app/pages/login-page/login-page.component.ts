@@ -7,33 +7,32 @@ import { AuthService } from 'src/app/services/auth.service';
 @Component({
   selector: 'app-login-page',
   templateUrl: './login-page.component.html',
-  styleUrls: ['./login-page.component.scss']
+  styleUrls: ['./login-page.component.scss'],
 })
 export class LoginPageComponent implements OnInit {
-  isLoading = false
+  isLoading = false;
+  wrongLogin = this.authService.wrongLogin;
 
   loginForm: FormGroup = new FormGroup({
     login: new FormControl('', [Validators.required]),
-    password: new FormControl('', [Validators.required])
-  })
+    password: new FormControl('', [Validators.required]),
+  });
 
-  constructor(private router: Router, private titleService: Title, private authService: AuthService) {    
-    this.titleService.setTitle('Вход')
-   }
-
-  login(){
-    this.isLoading = true
-    this.authService.login(this.loginForm.controls['login'].value, this.loginForm.controls['password'].value)
-    
-    if(this.authService.isAuth){
-      this.router.navigateByUrl('/find');
-    } else{
-      console.warn("wrong login or password")
-    }
-    this.isLoading = false
+  constructor(
+    private titleService: Title,
+    public authService: AuthService
+  ) {
+    this.titleService.setTitle('Вход');
   }
 
-  ngOnInit(): void {
+  login() {
+    this.isLoading = true;
+    this.authService.login(
+      this.loginForm.controls['login'].value,
+      this.loginForm.controls['password'].value
+    );
+    this.isLoading = false;
   }
 
+  ngOnInit(): void {}
 }

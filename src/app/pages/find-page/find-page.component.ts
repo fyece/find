@@ -3,7 +3,7 @@ import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { Title } from '@angular/platform-browser';
 import { FindService } from 'src/app/services/find.service';
 import { Contract, ContractDto } from 'src/app/types/types';
-import { MonthDiffValidator } from 'src/app/utils';
+import { MonthDiffValidator, unseparatedToDate } from 'src/app/utils';
 
 @Component({
   selector: 'app-find-page',
@@ -12,13 +12,13 @@ import { MonthDiffValidator } from 'src/app/utils';
 })
 export class FindPageComponent implements OnInit {
   contracts: Contract[] = [];
-  file: any = []
+  file: any = [];
 
   findForm: FormGroup = new FormGroup(
     {
       contractNumber: new FormControl('', [
         Validators.required,
-        Validators.minLength(3)
+        Validators.minLength(3),
       ]),
       dateFrom: new FormControl('', Validators.required),
       dateTo: new FormControl('', Validators.required),
@@ -39,23 +39,22 @@ export class FindPageComponent implements OnInit {
       insurant: this.findForm.get('insurant')?.value,
       insured: this.findForm.get('insured')?.value,
       contractNumber: this.findForm.get('contractNumber')?.value,
-      applicationDateStart: this.findForm.get('dateFrom')?.value,
-      applicationDateEnd: this.findForm.get('dateTo')?.value,
+      applicationDateStart: unseparatedToDate(
+        this.findForm.get('dateFrom')?.value
+      ),
+      applicationDateEnd: unseparatedToDate(this.findForm.get('dateTo')?.value),
     };
-    this.findService
-      .getContracts(contractDto)
-      .subscribe((contracts) => {
-        if(contracts.length > 0 && contracts[0].Res == '1'){
-          this.contracts = contracts
-        } else {
-          this.contracts = []
-        }
+    this.findService.getContracts(contractDto).subscribe((contracts) => {
+      if (contracts.length > 0 && contracts[0].Res == '1') {
+        this.contracts = contracts;
+      } else {
+        this.contracts = [];
       }
-      );
+    });
   }
 
   download() {
-    this.findService.getContractFile().subscribe(file => this.file = file)
+    this.findService.getContractFile().subscribe((file) => (this.file = file));
     console.log('downloading');
   }
 

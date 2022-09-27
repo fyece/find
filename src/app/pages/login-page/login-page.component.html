@@ -47,12 +47,16 @@
                 >Введите пароль</span
               >
             </div>
+
+            <span *ngIf="this.authService.wrongLogin" class="error-message"
+              >Неправильный логин или пароль</span
+            >
           </div>
         </div>
       </form>
     </div>
     <button
-      [disabled]="loginForm.invalid"
+      [disabled]="loginForm.invalid && isLoading"
       (click)="login()"
       class="rounded px-8 py-2 mx-auto h-fit font-semibold bg-green-500 text-white duration-100 hover:bg-green-600 hover:ease-in disabled:bg-green-300"
     >

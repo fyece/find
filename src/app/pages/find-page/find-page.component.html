@@ -36,16 +36,16 @@
             <div class="grid gap-3 grid-cols-2">
               <input
                 type="text"
-                onfocus="(this.type='date')"
-                onblur="(this.type='text')"
+                mask="d0/M0/0000"
+                [leadZeroDateTime]="true"
                 placeholder="Дата от"
                 formControlName="dateFrom"
                 class="input-field"
               />
               <input
                 type="text"
-                onfocus="(this.type='date')"
-                onblur="(this.type='text')"
+                mask="d0/M0/0000"
+                [leadZeroDateTime]="true"
                 placeholder="Дата до"
                 formControlName="dateTo"
                 class="input-field"
@@ -121,35 +121,20 @@
             </tr>
           </thead>
           <tbody>
-
-            <!-- FAKE ROW -->
-            <!-- <tr class="tab-row">
-              <th scope="row" class="tab-cell">1</th>
-              <td class="tab-cell">Имя Фамилия Отчество</td>
-              <td class="tab-cell">Имя Фамилия Отчество</td>
-              <td class="tab-cell">999999999999</td>
-              <td class="tab-cell">9.09.22</td>
-              <td class="tab-cell">9.09.22</td>
-              <td class="tab-cell">28000 / 12000</td>
+            <tr
+              *ngFor="let contract of contracts; let i = index"
+              class="tab-row"
+            >
+              <th scope="row" class="tab-cell">{{ i + 1 }}</th>
+              <td class="tab-cell">{{ contract.strahov }}</td>
+              <td class="tab-cell">{{ contract.zastr }}</td>
+              <td class="tab-cell">{{ contract.dog_nom }}</td>
+              <td class="tab-cell">{{ contract.dog_data }}</td>
+              <td class="tab-cell">{{ contract.pay_data }}</td>
               <td class="tab-cell">
-                <button
-                  class="px-2 py-2 text-green-600 font-semibold duration-100 hover:text-green-700 hover:ease-in"
-                  (click)="download()"
-                >
-                  Скачать
-                </button>
+                {{ contract.strahsum | number: "1.0-2" }} /
+                {{ contract.premia | number: "1.0-2" }}
               </td>
-            </tr> -->
-
-            <!-- REAL ROWS -->
-            <tr *ngFor="let contract of contracts; let i = index" class="tab-row">
-              <th scope="row" class="tab-cell">{{i+1}}</th>
-              <td class="tab-cell">{{contract.strahov}}</td>
-              <td class="tab-cell">{{contract.zastr}}</td>
-              <td class="tab-cell">{{contract.dog_nom}}</td>
-              <td class="tab-cell">{{contract.dog_data}}</td>
-              <td class="tab-cell">{{contract.pay_data}}</td>
-              <td class="tab-cell">{{contract.strahsum | number : '1.0-2'}} / {{contract.premia | number : '1.0-2'}}</td>
               <td class="tab-cell">
                 <button
                   class="px-2 py-2 text-green-600 font-semibold duration-100 hover:text-green-700 hover:ease-in"
