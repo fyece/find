@@ -1,4 +1,4 @@
-import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
+import { HttpClient, HttpParams } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { catchError, Observable, of } from 'rxjs';
 import { Contract, ContractDto } from '../types/types';
@@ -22,7 +22,6 @@ export class FindService {
   getContractFile() {
     const url = ``;
     const params: HttpParams = new HttpParams();
-    // add params
     return this.http.get(url, { params: params });
   }
 

@@ -13,6 +13,7 @@ import { MonthDiffValidator, unseparatedToDate } from 'src/app/utils';
 export class FindPageComponent implements OnInit {
   contracts: Contract[] = [];
   file: any = [];
+  errorMessage: string = '';
 
   findForm: FormGroup = new FormGroup(
     {
@@ -43,12 +44,21 @@ export class FindPageComponent implements OnInit {
         this.findForm.get('dateFrom')?.value
       ),
       applicationDateEnd: unseparatedToDate(this.findForm.get('dateTo')?.value),
+      phone:
+        this.findForm.get('phoneNumber')?.value == ''
+          ? null
+          : this.findForm.get('phoneNumber')?.value,
     };
+
     this.findService.getContracts(contractDto).subscribe((contracts) => {
       if (contracts.length > 0 && contracts[0].Res == '1') {
         this.contracts = contracts;
-      } else {
+        this.errorMessage = '';
+      } else if (contracts.length === 0) {
         this.contracts = [];
+      } else {
+        this.errorMessage =
+          contracts[0].Msg || 'Произошла непредвиденная ошибка';
       }
     });
   }

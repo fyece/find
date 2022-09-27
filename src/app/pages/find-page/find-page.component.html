@@ -87,6 +87,9 @@
             formControlName="email"
             class="input-field"
           />
+          <span *ngIf="errorMessage" class="error-message">{{
+            errorMessage
+          }}</span>
           <button
             [disabled]="findForm.invalid"
             class="rounded font-semibold px-8 py-2 w-fit mx-auto bg-green-500 text-white duration-100 hover:bg-green-600 hover:ease-in disabled:bg-green-300"
@@ -117,6 +120,7 @@
               <th scope="col" class="thead-col">Дата заявления</th>
               <th scope="col" class="thead-col">Дата оплаты</th>
               <th scope="col" class="thead-col">Страховая сумма / Премия</th>
+              <th scope="col" class="thead-col">Номер телефона</th>
               <th scope="col" class="thead-col"></th>
             </tr>
           </thead>
@@ -135,6 +139,7 @@
                 {{ contract.strahsum | number: "1.0-2" }} /
                 {{ contract.premia | number: "1.0-2" }}
               </td>
+              <td class="tab-cell">{{ contract.s_phone }}</td>
               <td class="tab-cell">
                 <button
                   class="px-2 py-2 text-green-600 font-semibold duration-100 hover:text-green-700 hover:ease-in"

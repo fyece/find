@@ -1,9 +1,4 @@
-import {
-  AbstractControl,
-  FormGroup,
-  ValidationErrors,
-  ValidatorFn,
-} from '@angular/forms';
+import { AbstractControl, ValidationErrors, ValidatorFn } from '@angular/forms';
 
 export function stringToDate(date: string) {
   const pattern = /(\d{2})\.(\d{2})\.(\d{4})/;
