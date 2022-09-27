@@ -19,6 +19,7 @@ export interface Contract {
   s_phone?: string;
   fiscal_number: string;
   pay_data?: string;
+  guid_contr: string;
   Res: string;
   Msg?: string;
 }

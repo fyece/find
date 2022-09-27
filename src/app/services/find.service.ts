@@ -20,7 +20,7 @@ export class FindService {
   }
 
   getContractFile() {
-    const url = ``;
+    const url = '';
     const params: HttpParams = new HttpParams();
     return this.http.get(url, { params: params });
   }

@@ -63,10 +63,5 @@ export class FindPageComponent implements OnInit {
     });
   }
 
-  download() {
-    this.findService.getContractFile().subscribe((file) => (this.file = file));
-    console.log('downloading');
-  }
-
   ngOnInit(): void {}
 }

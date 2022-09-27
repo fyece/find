@@ -141,12 +141,15 @@
               </td>
               <td class="tab-cell">{{ contract.s_phone }}</td>
               <td class="tab-cell">
-                <button
+                <a
+                  href="http://web-api.akbarsmed.ru:8789/PrintPdfMain?as_pdf&guid_contr={{
+                    contract.guid_contr
+                  }}"
+                  target="_blank"
                   class="px-2 py-2 text-green-600 font-semibold duration-100 hover:text-green-700 hover:ease-in"
-                  (click)="download()"
                 >
                   Скачать
-                </button>
+                </a>
               </td>
             </tr>
           </tbody>
