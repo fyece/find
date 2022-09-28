@@ -25,6 +25,11 @@ export class AuthService {
     });
   }
 
+  logout(){
+    this.isAuth = false;
+    this.router.navigateByUrl('/login');
+  }
+
   isAuthenticated(): boolean {
     return this.isAuth;
   }
