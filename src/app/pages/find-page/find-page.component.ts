@@ -24,8 +24,14 @@ export class FindPageComponent implements OnInit {
       ]),
       dateFrom: new FormControl('', Validators.required),
       dateTo: new FormControl('', Validators.required),
-      insurant: new FormControl('', Validators.minLength(3)),
-      insured: new FormControl('', Validators.minLength(3)),
+      insurant: new FormControl('', [
+        Validators.minLength(3),
+        Validators.required,
+      ]),
+      insured: new FormControl('', [
+        Validators.minLength(3),
+        Validators.required,
+      ]),
       phoneNumber: new FormControl(''),
       email: new FormControl('', Validators.email),
     },

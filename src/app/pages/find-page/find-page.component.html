@@ -6,7 +6,12 @@
         alt="AK BARS Med logo"
         class="block h-8 mx-auto sm:mx-0"
       />
-      <button (click)="logout()" class="px-2 py-2 text-gray-400 font-semibold duration-100 hover:text-gray-600 hover:ease-in">Выйти</button>
+      <button
+        (click)="logout()"
+        class="px-2 py-2 text-gray-400 font-semibold duration-100 hover:text-gray-600 hover:ease-in"
+      >
+        Выйти
+      </button>
     </div>
     <div class="bg-white rounded-lg p-4 md:p-6 w-fit mx-auto">
       <h1 class="text-4xl text-gray-700 font-semibold text-center mb-6">
@@ -60,22 +65,45 @@
                 findForm.errors['diffMoreThanMonth']
               "
               class="error-message"
-              >Промежуток должен быть меньше одного месяца</span
+              >Период должен быть меньше месяца</span
             >
           </div>
-
-          <input
-            type="text"
-            placeholder="ФИО страхователя"
-            formControlName="insurant"
-            class="input-field"
-          />
-          <input
-            type="text"
-            placeholder="ФИО застрахованного"
-            formControlName="insured"
-            class="input-field"
-          />
+          <div class="flex flex-col space-y-1">
+            <input
+              type="text"
+              placeholder="ФИО страхователя"
+              formControlName="insurant"
+              class="input-field"
+            />
+            <span
+              [hidden]="
+                !(
+                  findForm.controls['insurant'].invalid &&
+                  findForm.controls['insurant'].touched
+                )
+              "
+              class="error-message"
+              >Необходимо ввести минимум 3 символа</span
+            >
+          </div>
+          <div class="flex flex-col space-y-1">
+            <input
+              type="text"
+              placeholder="ФИО застрахованного"
+              formControlName="insured"
+              class="input-field"
+            />
+            <span
+              [hidden]="
+                !(
+                  findForm.controls['insured'].invalid &&
+                  findForm.controls['insured'].touched
+                )
+              "
+              class="error-message"
+              >Необходимо ввести минимум 3 символа</span
+            >
+          </div>
           <input
             type="text"
             placeholder="Номер телефона"
