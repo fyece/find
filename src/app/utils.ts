@@ -19,6 +19,7 @@ export function isMonthDiff(dateFrom: string, dateTo: string) {
   const date2 = stringToDate(unseparatedToDate(dateTo));
   const month = 31 * 24 * 60 * 60 * 1000;
   const diff = Math.abs(date1.getTime() - date2.getTime());
+
   if (diff <= month) {
     return true;
   } else {
@@ -30,6 +31,7 @@ export const MonthDiffValidator: ValidatorFn = (fg: AbstractControl) => {
   const start = fg.get('dateFrom')?.value;
   const end = fg.get('dateTo')?.value;
   const diff = isMonthDiff(start, end);
+
   return start !== null && end !== null && diff
     ? null
     : ({ diffMoreThanMonth: true } as ValidationErrors);

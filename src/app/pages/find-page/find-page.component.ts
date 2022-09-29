@@ -13,8 +13,9 @@ import { MonthDiffValidator, unseparatedToDate } from 'src/app/utils';
 })
 export class FindPageComponent implements OnInit {
   contracts: Contract[] = [];
-  file: any = [];
   errorMessage: string = '';
+  isNothingFound = false;
+  isLoading = false;
 
   findForm: FormGroup = new FormGroup(
     {
@@ -61,17 +62,21 @@ export class FindPageComponent implements OnInit {
           : this.findForm.get('phoneNumber')?.value,
     };
 
+    this.isLoading = true;
     this.findService.getContracts(contractDto).subscribe((contracts) => {
       if (contracts.length > 0 && contracts[0].Res == '1') {
         this.contracts = contracts;
         this.errorMessage = '';
+        this.isNothingFound = false;
       } else if (contracts.length === 0) {
+        this.isNothingFound = true;
         this.contracts = [];
       } else {
         this.errorMessage =
           contracts[0].Msg || 'Произошла непредвиденная ошибка';
       }
     });
+    this.isLoading = false;
   }
 
   logout() {

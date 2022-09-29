@@ -19,12 +19,6 @@ export class FindService {
       .pipe(catchError(this.handleError<Contract[]>('getContracts', [])));
   }
 
-  getContractFile() {
-    const url = '';
-    const params: HttpParams = new HttpParams();
-    return this.http.get(url, { params: params });
-  }
-
   private handleError<T>(operation = 'operation', result?: T) {
     return (error: any): Observable<T> => {
       console.warn(error);
