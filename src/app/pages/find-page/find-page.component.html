@@ -35,7 +35,7 @@
                 )
               "
               class="error-message"
-              >Необходимо ввести минимум 3 символа</span
+              >Необходимо ввести минимум 2 символа</span
             >
           </div>
           <div>
@@ -119,12 +119,23 @@
           <span *ngIf="errorMessage" class="error-message">{{
             errorMessage
           }}</span>
-          <button
-            [disabled]="findForm.invalid"
-            class="rounded font-semibold px-8 py-2 w-fit mx-auto bg-green-500 text-white duration-100 hover:bg-green-600 hover:ease-in disabled:bg-green-300"
-          >
-            Найти
-          </button>
+
+          <div class="grid grid-cols-3">
+            <div></div>
+            <button
+              [disabled]="findForm.invalid || findForm.pristine"
+              class="block rounded font-semibold px-8 py-2 w-fit mx-auto bg-green-500 text-white duration-100 hover:bg-green-600 hover:ease-in disabled:bg-green-300"
+            >
+              Найти
+            </button>
+            <button
+              type="reset"
+              (click)="resetForm()"
+              class="block py-2 w-fit justify-self-end font-semibold text-gray-400 duration-100 hover:text-gray-500 hover:ease-in"
+            >
+              Очистить
+            </button>
+          </div>
         </div>
       </form>
     </div>

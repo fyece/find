@@ -13,12 +13,25 @@ export function unseparatedToDate(date: string) {
   }
   return date;
 }
+export function unseparatedToDateMMDDYYYY(date: string) {
+  if (date.length === 8) {
+    return [date.substring(2, 4), date.substring(0, 2), date.substring(4)].join(
+      '/'
+    );
+  }
+  return date;
+}
 
 export function isMonthDiff(dateFrom: string, dateTo: string) {
-  const date1 = stringToDate(unseparatedToDate(dateFrom));
-  const date2 = stringToDate(unseparatedToDate(dateTo));
+  const date1 = stringToDate(unseparatedToDateMMDDYYYY(dateFrom));
+  const date2 = stringToDate(unseparatedToDateMMDDYYYY(dateTo));
   const month = 31 * 24 * 60 * 60 * 1000;
   const diff = Math.abs(date1.getTime() - date2.getTime());
+  console.log(
+    `dateFrom: ${date1}, dateTo: ${date2}, diff: ${diff}, isLessThanAMonth: ${
+      diff <= month
+    }`
+  );
 
   if (diff <= month) {
     return true;

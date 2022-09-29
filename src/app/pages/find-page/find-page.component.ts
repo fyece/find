@@ -11,7 +11,7 @@ import { MonthDiffValidator, unseparatedToDate } from 'src/app/utils';
   templateUrl: './find-page.component.html',
   styleUrls: ['./find-page.component.scss'],
 })
-export class FindPageComponent implements OnInit {
+export class FindPageComponent {
   contracts: Contract[] = [];
   errorMessage: string = '';
   isNothingFound = false;
@@ -21,7 +21,7 @@ export class FindPageComponent implements OnInit {
     {
       contractNumber: new FormControl('', [
         Validators.required,
-        Validators.minLength(3),
+        Validators.minLength(2),
       ]),
       dateFrom: new FormControl('', Validators.required),
       dateTo: new FormControl('', Validators.required),
@@ -79,9 +79,15 @@ export class FindPageComponent implements OnInit {
     this.isLoading = false;
   }
 
+  resetForm() {
+    this.findForm.markAsPristine();
+    this.findForm.markAsUntouched();
+    this.findForm.updateValueAndValidity();
+    this.errorMessage = '';
+    this.contracts = [];
+  }
+
   logout() {
     this.authService.logout();
   }
-
-  ngOnInit(): void {}
 }
