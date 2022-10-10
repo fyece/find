@@ -27,11 +27,6 @@ export function isMonthDiff(dateFrom: string, dateTo: string) {
   const date2 = stringToDate(unseparatedToDateMMDDYYYY(dateTo));
   const month = 31 * 24 * 60 * 60 * 1000;
   const diff = Math.abs(date1.getTime() - date2.getTime());
-  console.log(
-    `dateFrom: ${date1}, dateTo: ${date2}, diff: ${diff}, isLessThanAMonth: ${
-      diff <= month
-    }`
-  );
 
   if (diff <= month) {
     return true;
