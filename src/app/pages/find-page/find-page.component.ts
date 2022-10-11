@@ -1,6 +1,7 @@
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { Title } from '@angular/platform-browser';
+import { ActivatedRoute } from '@angular/router';
 import { AuthService } from 'src/app/services/auth.service';
 import { FindService } from 'src/app/services/find.service';
 import { Contract, ContractDto } from 'src/app/types/types';
@@ -14,6 +15,7 @@ import { MonthDiffValidator, unseparatedToDate } from 'src/app/utils';
 export class FindPageComponent {
   contracts: Contract[] = [];
   errorMessage: string = '';
+  token = '';
   isNothingFound = false;
   isLoading = false;
 
@@ -42,7 +44,8 @@ export class FindPageComponent {
   constructor(
     private titleService: Title,
     private findService: FindService,
-    private authService: AuthService
+    private authService: AuthService,
+    private route: ActivatedRoute
   ) {
     this.titleService.setTitle('Поиск договоров');
   }
@@ -89,5 +92,11 @@ export class FindPageComponent {
 
   logout() {
     this.authService.logout();
+  }
+
+  ngOnInit(): void {
+    this.route.queryParamMap.subscribe(
+      (params) => (this.token = params.get('token') ?? '')
+    );
   }
 }

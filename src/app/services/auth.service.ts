@@ -7,6 +7,7 @@ import { Router } from '@angular/router';
 })
 export class AuthService {
   baseUrl = 'http://orderfinder';
+  token = '';
   isAuth = false;
   wrongLogin = false;
 
@@ -23,6 +24,18 @@ export class AuthService {
         this.wrongLogin = true;
       }
     });
+  }
+
+  loginWithToken(token: string) {
+    if (token == '123') {
+      this.token = token;
+      this.isAuth = true;
+      console.log(`auth with token ${this.token}`);
+    }
+  }
+
+  checkToken(token: string) {
+    return token == '123';
   }
 
   logout() {

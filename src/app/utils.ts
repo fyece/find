@@ -1,8 +1,9 @@
 import { AbstractControl, ValidationErrors, ValidatorFn } from '@angular/forms';
 
 export function stringToDate(date: string) {
+  const correctDate = date?? '';
   const pattern = /(\d{2})\.(\d{2})\.(\d{4})/;
-  return new Date(date.replace(pattern, '$3-$2-$1'));
+  return new Date(correctDate.replace(pattern, '$3-$2-$1'));
 }
 
 export function unseparatedToDate(date: string) {
@@ -14,7 +15,7 @@ export function unseparatedToDate(date: string) {
   return date;
 }
 export function unseparatedToDateMMDDYYYY(date: string) {
-  if (date.length === 8) {
+  if (date && date.length === 8) {
     return [date.substring(2, 4), date.substring(0, 2), date.substring(4)].join(
       '/'
     );
