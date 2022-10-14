@@ -145,12 +145,6 @@
     >
       <h2 class="text-xl font-semibold text-gray-700">Список договоров</h2>
 
-      <div *ngIf="false">
-        <p class="text-xl font-semibold text-gray-400 pb-4 text-center">
-          Ничего не найдено
-        </p>
-      </div>
-
       <div *ngIf="true" class="overflow-x-auto w-full">
         <table class="tab sticky top-0 w-full">
           <thead class="thead">
@@ -199,7 +193,7 @@
           </tbody>
         </table>
       </div>
-      <div *ngIf="isNothingFound" class="flex">
+      <div *ngIf="isNothingFound && !isLoading" class="flex">
         <span class="block p-3 mx-auto font-semibold text-gray-400"
           >Ничего не найдено</span
         >

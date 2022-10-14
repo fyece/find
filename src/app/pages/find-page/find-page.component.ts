@@ -78,8 +78,8 @@ export class FindPageComponent {
         this.errorMessage =
           contracts[0].Msg || 'Произошла непредвиденная ошибка';
       }
+      this.isLoading = false;
     });
-    this.isLoading = false;
   }
 
   resetForm() {
