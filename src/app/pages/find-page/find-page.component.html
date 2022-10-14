@@ -123,7 +123,7 @@
           <div class="grid grid-cols-3">
             <div></div>
             <button
-              [disabled]="findForm.invalid || findForm.pristine"
+              [disabled]="findForm.invalid || findForm.pristine || isLoading"
               class="block rounded font-semibold px-8 py-2 w-fit mx-auto bg-green-500 text-white duration-100 hover:bg-green-600 hover:ease-in disabled:bg-green-300"
             >
               Найти
