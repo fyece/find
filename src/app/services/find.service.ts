@@ -1,7 +1,7 @@
-import { HttpClient, HttpParams } from '@angular/common/http';
+import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { catchError, Observable, of } from 'rxjs';
-import { Contract, ContractDto } from '../types/types';
+import { Contract, ContractDto, LogDownloadDto } from '../types/types';
 
 @Injectable({
   providedIn: 'root',
@@ -17,6 +17,11 @@ export class FindService {
     return this.http
       .post<Contract[]>(url, contractDto)
       .pipe(catchError(this.handleError<Contract[]>('getContracts', [])));
+  }
+
+  logDownload(logDownloadDto:LogDownloadDto){
+    const url = `${this.baseUrl}/download`;
+    return this.http.post(url, logDownloadDto)
   }
 
   private handleError<T>(operation = 'operation', result?: T) {

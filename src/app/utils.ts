@@ -1,7 +1,7 @@
 import { AbstractControl, ValidationErrors, ValidatorFn } from '@angular/forms';
 
 export function stringToDate(date: string) {
-  const correctDate = date?? '';
+  const correctDate = date ?? '';
   const pattern = /(\d{2})\.(\d{2})\.(\d{4})/;
   return new Date(correctDate.replace(pattern, '$3-$2-$1'));
 }

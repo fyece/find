@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { HttpClient } from '@angular/common/http';
 import { Router } from '@angular/router';
 
 @Injectable({
@@ -7,7 +7,7 @@ import { Router } from '@angular/router';
 })
 export class AuthService {
   baseUrl = 'http://orderfinder';
-  token = '';
+  id = '';
   isAuth = false;
   wrongLogin = false;
 
@@ -26,24 +26,8 @@ export class AuthService {
     });
   }
 
-  loginWithToken(token: string) {
-    if (token == '123') {
-      this.token = token;
-      this.isAuth = true;
-      console.log(`auth with token ${this.token}`);
-    }
-  }
-
-  checkToken(token: string) {
-    return token == '123';
-  }
-
   logout() {
     this.isAuth = false;
     this.router.navigateByUrl('/login');
-  }
-
-  isAuthenticated(): boolean {
-    return this.isAuth;
   }
 }

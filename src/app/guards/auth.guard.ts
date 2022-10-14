@@ -22,7 +22,7 @@ export class AuthGuard implements CanActivate {
     | Promise<boolean | UrlTree>
     | boolean
     | UrlTree {
-    if (route.queryParamMap.get('token')) {
+    if (route.queryParamMap.get('id')) {
       return true;
     }
     if (!this.authService.isAuth) {

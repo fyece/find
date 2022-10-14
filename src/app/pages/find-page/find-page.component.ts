@@ -4,7 +4,7 @@ import { Title } from '@angular/platform-browser';
 import { ActivatedRoute } from '@angular/router';
 import { AuthService } from 'src/app/services/auth.service';
 import { FindService } from 'src/app/services/find.service';
-import { Contract, ContractDto } from 'src/app/types/types';
+import { Contract, ContractDto, LogDownloadDto } from 'src/app/types/types';
 import { MonthDiffValidator, unseparatedToDate } from 'src/app/utils';
 
 @Component({
@@ -15,7 +15,7 @@ import { MonthDiffValidator, unseparatedToDate } from 'src/app/utils';
 export class FindPageComponent {
   contracts: Contract[] = [];
   errorMessage: string = '';
-  token = '';
+  id = '';
   isNothingFound = false;
   isLoading = false;
 
@@ -94,9 +94,17 @@ export class FindPageComponent {
     this.authService.logout();
   }
 
+  download(guid: string) {
+    const logData: LogDownloadDto = {
+      id: Number(this.id),
+      resource: `http://web-api.akbarsmed.ru:8789/PrintPdfMain?as_pdf&guid_contr=${guid}`,
+    };
+    this.findService.logDownload(logData).subscribe();
+  }
+
   ngOnInit(): void {
     this.route.queryParamMap.subscribe(
-      (params) => (this.token = params.get('token') ?? '')
+      (params) => (this.id = params.get('id') ?? '')
     );
   }
 }

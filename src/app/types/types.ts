@@ -1,12 +1,3 @@
-export interface ContractDto {
-  insurant?: string;
-  insured?: string;
-  contractNumber: string;
-  applicationDateStart: string;
-  applicationDateEnd: string;
-  phone: string | null;
-}
-
 export interface Contract {
   dog_nom: string;
   dog_data: string;
@@ -24,7 +15,21 @@ export interface Contract {
   Msg?: string;
 }
 
+export interface ContractDto {
+  insurant?: string;
+  insured?: string;
+  contractNumber: string;
+  applicationDateStart: string;
+  applicationDateEnd: string;
+  phone: string | null;
+}
+
 export interface LoginDto {
   login: string;
   pass: string;
+}
+
+export interface LogDownloadDto {
+  id: number;
+  resource: string;
 }
