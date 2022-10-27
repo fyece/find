@@ -89,6 +89,27 @@
           <div class="flex flex-col space-y-1">
             <input
               type="text"
+              mask="d0.M0.0000"
+              [leadZeroDateTime]="true"
+              placeholder="Дата рождения страхователя"
+              formControlName="insurantBirth"
+              class="input-field"
+            />
+            <span
+              [hidden]="
+                !(
+                  findForm.controls['insurant'].touched &&
+                  findForm.errors &&
+                  findForm.errors['insurantNeedBday']
+                )
+              "
+              class="error-message"
+              >Необходимо ввести дату рождения</span
+            >
+          </div>
+          <div class="flex flex-col space-y-1">
+            <input
+              type="text"
               placeholder="ФИО застрахованного"
               formControlName="insured"
               class="input-field"
@@ -104,18 +125,39 @@
               >Необходимо ввести минимум 3 символа</span
             >
           </div>
+          <div class="flex flex-col space-y-1">
+            <input
+              type="text"
+              mask="d0.M0.0000"
+              [leadZeroDateTime]="true"
+              placeholder="Дата рождения застрахованного"
+              formControlName="insuredBirth"
+              class="input-field"
+            />
+            <span
+              [hidden]="
+                !(
+                  findForm.controls['insured'].touched &&
+                  findForm.errors &&
+                  findForm.errors['insuredNeedBday']
+                )
+              "
+              class="error-message"
+              >Необходимо ввести дату рождения</span
+            >
+          </div>
           <input
             type="text"
             placeholder="Номер телефона"
             formControlName="phoneNumber"
             class="input-field"
           />
-          <input
+          <!-- <input
             type="text"
             placeholder="Email"
             formControlName="email"
             class="input-field"
-          />
+          /> -->
           <span *ngIf="errorMessage" class="error-message">{{
             errorMessage
           }}</span>
@@ -124,7 +166,7 @@
             <div></div>
             <button
               [disabled]="findForm.invalid || findForm.pristine || isLoading"
-              class="block rounded font-semibold px-8 py-2 w-fit mx-auto bg-green-500 text-white duration-100 hover:bg-green-600 hover:ease-in disabled:bg-green-300"
+              class="block rounded font-semibold px-8 py-2 w-fit mx-auto bg-emerald-500 text-white duration-100 hover:bg-emerald-600 hover:ease-in disabled:bg-emerald-300"
             >
               Найти
             </button>
@@ -183,7 +225,7 @@
                       contract.guid_contr
                     }}"
                     target="_blank"
-                    class="px-2 py-2 text-green-600 font-semibold duration-100 hover:text-green-700 hover:ease-in"
+                    class="px-2 py-2 text-emerald-600 font-semibold duration-100 hover:text-emerald-700 hover:ease-in"
                   >
                     Скачать
                   </a>

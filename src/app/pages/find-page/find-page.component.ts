@@ -5,7 +5,12 @@ import { ActivatedRoute } from '@angular/router';
 import { AuthService } from 'src/app/services/auth.service';
 import { FindService } from 'src/app/services/find.service';
 import { Contract, ContractDto, LogDownloadDto } from 'src/app/types/types';
-import { MonthDiffValidator, unseparatedToDate } from 'src/app/utils';
+import {
+  FullFormValidator,
+  InsurantSearchValidator,
+  InsuredSearchValidator,
+  unseparatedToDate,
+} from 'src/app/utils';
 
 @Component({
   selector: 'app-find-page',
@@ -21,24 +26,20 @@ export class FindPageComponent {
 
   findForm: FormGroup = new FormGroup(
     {
-      contractNumber: new FormControl('', [
-        Validators.required,
-        Validators.minLength(2),
-      ]),
-      dateFrom: new FormControl('', Validators.required),
-      dateTo: new FormControl('', Validators.required),
-      insurant: new FormControl('', [
-        Validators.minLength(3),
-        Validators.required,
-      ]),
-      insured: new FormControl('', [
-        Validators.minLength(3),
-        Validators.required,
-      ]),
+      contractNumber: new FormControl('', [Validators.minLength(2)]),
+
+      dateFrom: new FormControl(''),
+      dateTo: new FormControl(''),
+
+      insurant: new FormControl('', [Validators.minLength(3)]),
+      insurantBirth: new FormControl(''),
+      insured: new FormControl('', [Validators.minLength(3)]),
+      insuredBirth: new FormControl(''),
+
       phoneNumber: new FormControl(''),
       email: new FormControl('', Validators.email),
     },
-    [MonthDiffValidator]
+    [FullFormValidator, InsurantSearchValidator, InsuredSearchValidator]
   );
 
   constructor(
@@ -52,17 +53,34 @@ export class FindPageComponent {
 
   find() {
     const contractDto: ContractDto = {
-      insurant: this.findForm.get('insurant')?.value,
-      insured: this.findForm.get('insured')?.value,
-      contractNumber: this.findForm.get('contractNumber')?.value,
+      insurant: this.findForm.get('insurant')?.value
+        ? this.findForm.get('insurant')?.value
+        : null,
+      insurantBirth: unseparatedToDate(
+        this.findForm.get('insurantBirth')?.value
+      )
+        ? unseparatedToDate(this.findForm.get('insurantBirth')?.value)
+        : null,
+      insured: this.findForm.get('insured')?.value
+        ? this.findForm.get('insured')?.value
+        : null,
+      insuredBirth: unseparatedToDate(this.findForm.get('insuredBirth')?.value)
+        ? unseparatedToDate(this.findForm.get('insuredBirth')?.value)
+        : null,
+      contractNumber: this.findForm.get('contractNumber')?.value
+        ? this.findForm.get('contractNumber')?.value
+        : null,
       applicationDateStart: unseparatedToDate(
         this.findForm.get('dateFrom')?.value
-      ),
-      applicationDateEnd: unseparatedToDate(this.findForm.get('dateTo')?.value),
-      phone:
-        this.findForm.get('phoneNumber')?.value == ''
-          ? null
-          : this.findForm.get('phoneNumber')?.value,
+      )
+        ? unseparatedToDate(this.findForm.get('dateFrom')?.value)
+        : null,
+      applicationDateEnd: unseparatedToDate(this.findForm.get('dateTo')?.value)
+        ? unseparatedToDate(this.findForm.get('dateTo')?.value)
+        : null,
+      phone: this.findForm.get('phoneNumber')?.value
+        ? this.findForm.get('phoneNumber')?.value
+        : null,
     };
 
     this.isLoading = true;

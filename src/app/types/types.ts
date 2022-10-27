@@ -16,12 +16,14 @@ export interface Contract {
 }
 
 export interface ContractDto {
-  insurant?: string;
-  insured?: string;
-  contractNumber: string;
-  applicationDateStart: string;
-  applicationDateEnd: string;
-  phone: string | null;
+  insurant?: string | null;
+  insurantBirth?: string | null;
+  insured?: string | null;
+  insuredBirth?: string | null;
+  contractNumber?: string | null;
+  applicationDateStart?: string | null;
+  applicationDateEnd?: string | null;
+  phone?: string | null;
 }
 
 export interface LoginDto {

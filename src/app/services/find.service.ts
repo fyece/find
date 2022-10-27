@@ -19,9 +19,9 @@ export class FindService {
       .pipe(catchError(this.handleError<Contract[]>('getContracts', [])));
   }
 
-  logDownload(logDownloadDto:LogDownloadDto){
+  logDownload(logDownloadDto: LogDownloadDto) {
     const url = `${this.baseUrl}/download`;
-    return this.http.post(url, logDownloadDto)
+    return this.http.post(url, logDownloadDto);
   }
 
   private handleError<T>(operation = 'operation', result?: T) {
