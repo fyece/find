@@ -7,7 +7,8 @@ import { Contract, ContractDto, LogDownloadDto } from '../types/types';
   providedIn: 'root',
 })
 export class FindService {
-  baseUrl = 'http://orderfinder';
+  // baseUrl = 'http://orderfinder';
+  baseUrl = 'https://gp.akbarsmed.ru';
 
   constructor(private http: HttpClient) {}
 

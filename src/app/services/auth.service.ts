@@ -6,7 +6,8 @@ import { Router } from '@angular/router';
   providedIn: 'root',
 })
 export class AuthService {
-  baseUrl = 'http://orderfinder';
+  // baseUrl = 'http://orderfinder';
+  baseUrl = 'https://gp.akbarsmed.ru';
   id = '';
   isAuth = false;
   wrongLogin = false;
