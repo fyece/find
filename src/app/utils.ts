@@ -10,8 +10,6 @@ export function unseparatedToDate(date: string) {
   if (date && date.length === 8) {
     return [date.substring(0, 2), date.substring(2, 4), date.substring(4)].join(
       '/'
-      //       return [date.substring(4), date.substring(2, 4), date.substring(0, 2)].join(
-      //         '-'
     );
   }
   return date;
@@ -49,18 +47,18 @@ export const MonthDiffValidator: ValidatorFn = (fg: AbstractControl) => {
 };
 
 export const FullFormValidator: ValidatorFn = (fg: AbstractControl) => {
-  const insurant = fg.get('insurant')?.value && !fg.get('insurant')?.invalid;
+  const insurant = fg.get('insurant')?.value && fg.get('insurant')?.valid;
   const insurantBirth =
-    fg.get('insurantBirth')?.value && !fg.get('insurantBirth')?.invalid;
-  const insured = fg.get('insured')?.value && !fg.get('insured')?.invalid;
+    fg.get('insurantBirth')?.value && fg.get('insurantBirth')?.valid;
+  const insured = fg.get('insured')?.value && fg.get('insured')?.valid;
   const insuredBirth =
-    fg.get('insuredBirth')?.value && !fg.get('insuredBirth')?.invalid;
+    fg.get('insuredBirth')?.value && fg.get('insuredBirth')?.valid;
   const contractNumber =
-    fg.get('contractNumber')?.value && !fg.get('contractNumber')?.invalid;
-
-  return contractNumber ||
+    fg.get('contractNumber')?.value && fg.get('contractNumber')?.valid;
+  
+  return (contractNumber ||
     (insurant && insurantBirth) ||
-    (insured && insuredBirth)
+    (insured && insuredBirth))
     ? null
     : ({ incorrectForm: true } as ValidationErrors);
 };
@@ -69,13 +67,12 @@ export const InsurantSearchValidator: ValidatorFn = (fg: AbstractControl) => {
   const insurant = fg.get('insurant');
   const insurantBirth = fg.get('insurantBirth');
   const contractNumber = fg.get('contractNumber');
-  
-  if(contractNumber?.value && contractNumber.valid){
-    return null
+
+  if (contractNumber?.value && contractNumber.valid) {
+    return null;
   }
 
   if (
-    // insurant?.value &&
     insurant?.untouched &&
     insurant?.valid &&
     (insurantBirth?.invalid || !insurantBirth?.value)
@@ -83,7 +80,6 @@ export const InsurantSearchValidator: ValidatorFn = (fg: AbstractControl) => {
     return { insurantNeedBday: true } as ValidationErrors;
   }
   if (
-    // insurantBirth?.value &&
     insurantBirth?.untouched &&
     insurantBirth?.valid &&
     (insurant?.invalid || !insurant?.value)
@@ -97,13 +93,12 @@ export const InsuredSearchValidator: ValidatorFn = (fg: AbstractControl) => {
   const insured = fg.get('insured');
   const insuredBirth = fg.get('insuredBirth');
   const contractNumber = fg.get('contractNumber');
-  
-  if(contractNumber?.value && contractNumber.valid){
-    return null
+
+  if (contractNumber?.value && contractNumber.valid) {
+    return null;
   }
 
   if (
-    // insured?.value &&
     insured?.untouched &&
     insured?.valid &&
     (insuredBirth?.invalid || !insuredBirth?.value)
@@ -111,7 +106,6 @@ export const InsuredSearchValidator: ValidatorFn = (fg: AbstractControl) => {
     return { insuredNeedBday: true } as ValidationErrors;
   }
   if (
-    // insuredBirth?.value &&
     insuredBirth?.untouched &&
     insuredBirth?.valid &&
     (insured?.invalid || !insured?.value)

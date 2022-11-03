@@ -39,7 +39,7 @@ export class FindPageComponent {
       phoneNumber: new FormControl(''),
       email: new FormControl('', Validators.email),
     },
-    [FullFormValidator, InsurantSearchValidator, InsuredSearchValidator]
+    [FullFormValidator]
   );
 
   constructor(

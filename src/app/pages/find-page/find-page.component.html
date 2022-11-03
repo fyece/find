@@ -100,7 +100,8 @@
                 !(
                   findForm.controls['insurant'].touched &&
                   findForm.errors &&
-                  findForm.errors['insurantNeedBday']
+                  findForm.controls['insurant'].valid &&
+                  findForm.controls['insurantBirth'].pristine
                 )
               "
               class="error-message"
@@ -139,7 +140,8 @@
                 !(
                   findForm.controls['insured'].touched &&
                   findForm.errors &&
-                  findForm.errors['insuredNeedBday']
+                  findForm.controls['insured'].valid &&
+                  findForm.controls['insuredBirth'].pristine
                 )
               "
               class="error-message"
